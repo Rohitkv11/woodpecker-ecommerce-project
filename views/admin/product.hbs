@@ -1,0 +1,42 @@
+{{>sidebar}}
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<div id="main">
+<h4 class="mt-5" >Products</h4>
+
+    <div class=" float-end mb-5">
+  <a href="/admin/addcategory"> <button type="button" class="btn btn-primary ">Add Category</button></a>
+    <a href="/admin/addbrand"> <button type="button" class="btn btn-primary ">Add Brand</button></a>
+
+   <a href="/admin/addproduct"> <button type="button" class="btn btn-primary ">Add Product</button></a>
+ 
+    </div>
+<table class="table mt-5">
+    
+  <thead>
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Stock</th>
+        <th scope="col">Discount</th>
+      <th scope="col">shipping cost</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each product}}
+    <tr>
+      <td><img height="150px" width="200px" src="/images/{{this.images.[0].image1}}" alt="">
+      </td>
+      <td>{{this.name}}</td>
+      <td>{{this.price}}</td>
+      <td>{{this.stock}}</td>
+        <td>{{this.discount}}</td>
+    <td>{{this.shippingcost}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,200 @@
+ {{>user-navbar}}   
+
+
+
+  <!--================Checkout Area =================-->
+  <section class="checkout_area padding_top mt-4">
+    <div class="container">
+
+      {{!-- <div class="cupon_area">
+        <div class="check_title">
+          <h2>
+            Have a coupon?
+            <a href="#">Click here to enter your code</a>
+          </h2>
+        </div>
+        <input type="text" placeholder="Enter coupon code" />
+        <a class="tp_btn" href="#">Apply Coupon</a>
+      </div> --}}
+
+  <!--================Address Area=================-->
+   <h4> DELIVERY ADDRESS</h4> 
+<div class="row">
+  <div class="col-lg-4 mt-3">
+   
+<div class="card" style="width: 18rem; background-color:#ecfdff; border:none;">
+  <div class="card-body">
+    <h5 class="card-title">{{details.username}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{details.mobilenumber}}</h6>
+       <h6 class="card-subtitle mb-2 text-muted">{{details.housename}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{details.area}}, {{details.city}}</h6>
+  <h6 class="card-subtitle mb-2 text-muted">{{details.state}}, {{details.country}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{details.pincode}}</h6>
+         
+
+    
+    
+ <button onclick="selectAddress('{{details._id}}')" style="background-color: #ff3368; color:white; border:none; font-size:13px;" class="btn-sm">Deliver to this addresss</button>
+  </div>
+</div>
+</div>
+
+
+
+ {{#each address}}
+<div class="col-lg-4 mt-3">
+  <div class="card" style="width: 18rem;  background-color:#ecfdff; border:none;">
+  <div class="card-body">
+    <h5 class="card-title">{{this.username}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{this.mobilenumber}}</h6>
+       <h6 class="card-subtitle mb-2 text-muted">{{this.housename}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{this.area}}, {{this.city}}</h6>
+ <h6 class="card-subtitle mb-2 text-muted">{{this.state}}, {{this.country}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{this.pincode}}</h6>
+          
+     
+    
+    
+      <button onclick="selectAddedAddress('{{this._id}}')" style="background-color: #ff3368; color:white; border:none; font-size:13px;" class="btn-sm">Deliver to this addresss</button>
+  </div>
+</div>
+ 
+</div>
+{{/each}}
+</div>
+<!--================shippind Address=================-->
+      <div class="billing_details mt-5">
+        <div class="row">
+         <div class="col-lg-8">
+            <h3>ADD A NEW ADDRESS</h3>
+                 <form action="/addShippingAddress" method="post">
+                <div class="row mt-2">
+                    <div class="col-md-12"><label class="labels">Name</label><input type="text" name="username" class="form-control" placeholder="first name" value=""></div>
+                    {{!-- <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div> --}}
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" name="phonenumber"  class="form-control" placeholder="enter phone number" value=""></div>
+                     <div class="col-md-12"><label class="labels">Email ID</label><input type="text" name="email" class="form-control" placeholder="enter email id" value=""></div>
+                    <div class="col-md-12"><label class="labels">House Name</label><input type="text" name="house_name" class="form-control" placeholder="enter house name" value=""></div>
+                    {{!-- <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div> --}}
+                    <div class="col-md-12"><label class="labels">Pincode</label><input type="number" name="pincode" class="form-control" placeholder="enter pincode" value=""></div>
+                                        <div class="col-md-12"><label class="labels">Area</label><input type="text" name="area" class="form-control" placeholder="enter area" value=""></div>
+                     <div class="col-md-12"><label class="labels">City</label><input type="text" name="city" class="form-control"  placeholder="enter city" value=""></div>
+
+                   
+                   
+                    {{!-- <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div> --}}
+                </div>
+                <div class="row mt-3">
+                   
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" name="state" class="form-control" value="" placeholder="state"></div>
+                     <div class="col-md-6"><label class="labels">Country</label><input type="text" name="country"  class="form-control" placeholder="country" value=""></div>
+                </div>
+                <div class="mt-5 text-center"><input class="btn_3  profile-button" style="background-color: #ff3368; border:none " type="submit" value="Save Address" ></div>
+         
+                </form>
+           {{!--   <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="first" name="name" />
+                <span class="placeholder" data-placeholder="First name"></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="last" name="name" />
+                <span class="placeholder" data-placeholder="Last name"></span>
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="company" name="company" placeholder="Company name" />
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="number" name="number" />
+                <span class="placeholder" data-placeholder="Phone number"></span>
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="email" name="compemailany" />
+                <span class="placeholder" data-placeholder="Email Address"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <select class="country_select">
+                  <option value="1">Country</option>
+                  <option value="2">Country</option>
+                  <option value="4">Country</option>
+                </select>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="add1" />
+                <span class="placeholder" data-placeholder="Address line 01"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add2" name="add2" />
+                <span class="placeholder" data-placeholder="Address line 02"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" />
+                <span class="placeholder" data-placeholder="Town/City"></span>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <select class="country_select">
+                  <option value="1">District</option>
+                  <option value="2">District</option>
+                  <option value="4">District</option>
+                </select>
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
+              </div>
+              <div class="col-md-12 form-group">
+                <div class="creat_account">
+                  <input type="checkbox" id="f-option2" name="selector" />
+                  <label for="f-option2">Create an account?</label>
+                </div>
+              </div>
+              <div class="col-md-12 form-group">
+                <div class="creat_account">
+                  <h3>Shipping Details</h3>
+                  <input type="checkbox" id="f-option3" name="selector" />
+                  <label for="f-option3">Ship to a different address?</label>
+                </div>
+                <textarea class="form-control" name="message" id="message" rows="1"
+                  placeholder="Order Notes"></textarea>
+              </div>
+            </form>--}}
+          </div> 
+          <div class="col-lg-4">
+     <div class="order_details_iner">
+                    <h3 class="mb-1" >Order Details</h3>
+              
+                    <table class="table table-borderless" style="background-color:#ecfdff ;">
+                        <thead>
+                            <tr>
+                            
+                                <th scope="col" colspan="2">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             {{#each orderSummary.products}}
+                            <tr>
+                                <td colspan="2" style="font-weight: 100;" ><span>{{pro_Id.name}}</span></td>
+                                <td style="font-weight: 100;" >x {{this.quantity}}</td>
+                                <td style="font-weight: 100;" > <span>{{this.subtotal}}</span></td>
+                            </tr>
+                            {{/each}}
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>  
+                                <th scope="col" colspan="3">Total</th>
+                                <th scope="col">{{orderSummary.total}}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <script src="/javascripts/ajax.js"></script>  
+  {{>user-footer}}

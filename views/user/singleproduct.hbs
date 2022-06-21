@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>aranaz</title>
+  <link rel="icon" href="img/favicon.png">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <!-- animate CSS -->
+  <link rel="stylesheet" href="/stylesheets/animate.css">
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" href="/stylesheets/owl.carousel.min.css">
+  <!-- nice select CSS -->
+  <link rel="stylesheet" href="/stylesheets/nice-select.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="/stylesheets/all.css">
+   <link rel="stylesheet" href="/stylesheets/lightslider.min.css">
+  <!-- flaticon CSS -->
+  <link rel="stylesheet" href="/stylesheets/flaticon.css">
+  <link rel="stylesheet" href="/stylesheets/themify-icons.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="/stylesheets/magnific-popup.css">
+  <!-- swiper CSS -->
+  <link rel="stylesheet" href="/stylesheets/slick.css">
+  <link rel="stylesheet" href="/stylesheets/price_rangs.css">
+  <!-- style CSS -->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+{{>user-navbar}} 
+
+  <!--================Single Product Area =================-->
+  <div class="product_image_area section_padding mt-5">
+    <div class="container">
+      <div class="row s_product_inner justify-content-between">
+        <div class="col-lg-7 col-xl-7">
+          <div class="product_slider_img">
+            <div id="vertical">
+              <div data-thumb="{{productDetail.images.[0].image1}}">
+                <img src="{{productDetail.images.[0].image1}}"/>
+              </div>
+              <div data-thumb="img/product/single-product/product_1.png">
+                <img src="img/product/single-product/product_1.png" />
+              </div>
+              <div data-thumb="img/product/single-product/product_1.png">
+                <img src="img/product/single-product/product_1.png" />
+              </div>
+              <div data-thumb="img/product/single-product/product_1.png">
+                <img src="img/product/single-product/product_1.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 col-xl-4">
+          <div class="s_product_text">
+            <h5>previous <span>|</span> next</h5>
+            <h3>{{productDetail.name}}</h3>
+            <h2>{{productDetail.price}}</h2>
+            <ul class="list">
+              <li>
+                <a class="active" href="#">
+                  <span>Category</span> : </a>
+              </li>
+              <li>
+                <a href="#"> <span>Availibility</span> : In Stock</a>
+              </li>
+            </ul>
+            <p>
+              {{productDetail.description}}
+            </p>
+            <div class="card_area d-flex justify-content-between align-items-center">
+              <a href="#" class="btn_3">add to cart</a>
+              <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--================End Single Product Area =================-->
+
+  
+
+ 
+
+  <!--::footer_part start::-->
+  <footer class="footer_part">
+   
+    <div class="copyright_part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="copyright_text">
+              <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="footer_icon social_icon">
+              <ul class="list-unstyled">
+                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--::footer_part end::-->
+                                    
+
+  <!-- jquery plugins here-->
+  <!-- jquery -->
+  <script src="/javascripts/jquery-1.12.1.min.js"></script>
+  <script src=""></script>
+  <!-- popper js -->
+  <script src="/javascripts/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <!-- easing js -->
+  <script src="/javascripts/jquery.magnific-popup.js"></script>
+  <!-- swiper js -->
+  <script src="/javascripts/lightslider.min.js"></script>
+  <!-- swiper js -->
+  <script src="/javascripts/masonry.pkgd.js"></script>
+  <!-- particles js -->
+  <script src="/javascripts/owl.carousel.min.js"></script>
+  <script src="/javascripts/jquery.nice-select.min.js"></script>
+  <!-- slick js -->
+  <script src="/javascripts/slick.min.js"></script>
+  <script src="/javascripts/swiper.jquery.js"></script>
+  <script src="/javascripts/jquery.counterup.min.js"></script>
+  <script src="/javascripts/waypoints.min.js"></script>
+  <script src="/javascripts/contact.js"></script>
+  <script src="/javascripts/jquery.ajaxchimp.min.js"></script>
+  <script src="/javascripts/jquery.form.js"></script>
+  <script src="/javascripts/jquery.validate.min.js"></script>
+  <script src="/javascripts/mail-script.js"></script>
+  <script src="/javascripts/stellar.js"></script>
+  <!-- custom js -->
+  <script src="/javascripts/theme.js"></script>
+  <script src="/javascripts/custom.js"></script>
+</body>
+
+</html>

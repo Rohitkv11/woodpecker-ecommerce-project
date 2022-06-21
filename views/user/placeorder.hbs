@@ -1,0 +1,178 @@
+{{>user-navbar}}
+
+<!--================ confirmation part start =================-->
+<section class="confirmation_part padding_top mt-4">
+    <div class="container">
+        
+            <h3>Check Out</h3>
+           <div class="row">
+            <div class="col-lg-8 ">
+                <div class="single_confirmation_details">
+                    <h4>Shipping Address</h4>
+                    <ul>
+                        <li>
+                            <p>{{shippingAddress.username}}</p> <br>
+                        </li>
+                        <li>
+                            <p>{{shippingAddress.mobilenumber}}</p> <br>
+                        </li>
+                     <li>
+                            <p>{{shippingAddress.housename}}</p> <br>
+                        </li>
+                         <li>
+                            <p>{{shippingAddress.area}}, {{shippingAddress.city}}</p> <br>
+                        </li>
+                        <li>
+                            <p>{{shippingAddress.state}}, {{shippingAddress.country}}</p> <br>
+                        </li> 
+                         <li>
+                            <p>{{shippingAddress.pincode}}</p> 
+                        </li>
+                    </ul>
+                   
+                </div>
+                 <div class="order_details_iner">
+                    <h3>Order Summary</h3>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col" colspan="2">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                             {{#each orderSummary.products}}
+                            <tr>
+                                <td colspan="2"><span>{{pro_Id.name}}</span></td>
+                                <td>x {{this.quantity}}</td>
+                                <td> <span>{{this.subtotal}}</span></td>
+                            </tr>
+                            {{/each}}
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col" colspan="3">Total</th>
+                                <th scope="col">{{orderSummary.total}}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+          
+            <div class="col-lg-4">
+                  <h4>Select a payment method</h4>
+
+             <div class="payment_item">
+                <div class="payment_item active">
+                <div class="radion_btn">
+                
+                <form action="" id="place_order" >
+                      <input type="radio" id="f-option6" value="Online payment" name="payment-method" checked />
+                  <label class="mt-4" for="f-option6">Razor Pay</label>
+                  <img src="img/product/single-product/card.jpg" alt="" />
+                  <div class="check"></div>
+                </div>
+                <p>
+                  Please send a check to Store Name, Store Street, Store Town,
+                  Store State / County, Store Postcode.
+                </p>
+              </div>
+                <div class="radion_btn">
+                  <input  type="radio" id="f-option5" name="payment-method" value="COD"   />
+                  <label class="mt-4" for="f-option5" >Pay on Delivery</label>
+                  <div class="check"></div>
+                </div>
+                <p>
+                  Please send a check to Store Name, Store Street, Store Town,
+                  Store State / County, Store Postcode.
+                </p>
+               </div>
+            <button class="btn_3 mt-3" type="submit">Proceed</button>
+              </form>
+           
+                
+        </div>
+        </div>
+          
+          {{!-- <div class="row">
+            <div class="col-lg-12">
+               
+            </div>
+        </div>
+     --}}
+</section>
+<!--================ confirmation part end =================-->
+{{>user-footer}}
+
+<script>  
+    $("#place_order").submit((e)=>{ 
+e.preventDefault() 
+$.ajax({
+    url:'/placeorder',
+    method:'post',
+    data:$('#place_order').serialize(),
+    success:(response)=>{
+        if(response.codSuccess){
+            location.href='/confirmation'
+        }else{
+            console.log(response)
+razorpayPayment(response)
+        }
+        
+    }
+})
+})
+function razorpayPayment(order){
+    var options = {
+    "key": "rzp_test_cgNgZJkGmaf45Q", // Enter the Key ID generated from the Dashboard
+    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Wood pecker",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+       ;
+
+ verifyPayment(response,order)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+ rzp1.open();
+}
+function verifyPayment(payment,order){
+    console.log(payment)
+    console.log(order)
+    $.ajax({
+        url:'/verify-payment',
+         method:'post',
+        data:{
+            payment,
+            order
+        },
+        success:(response)=>{
+            if(response.status){
+                location.href='/confirmation'
+            }
+        else{
+            alert("payment failed")
+        }
+        }
+})
+}
+</script>

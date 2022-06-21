@@ -1,0 +1,82 @@
+{{> sidebar}}
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<div id="main">
+		{{!-- <div class="head">  --}}
+            <h3>Add Product</h3>
+<form action="/admin/addproduct" method="post" enctype="multipart/form-data" id="addProduct">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Name</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="Name" name="name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">price</label>
+      <input type="number" class="form-control" id="inputPassword4" placeholder="Price" name="price">
+    </div>
+ 
+  <div class="form-group col-md-6">
+    <label for="inputAddress">Description</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Description" name="description">
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputAddress2">Stock</label>
+    <input type="number" class="form-control" id="inputAddress2" placeholder="Stock" name="stock">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Discount</label>
+      <input type="number" class="form-control" id="inputCity" placeholder="Discount" name="discount" >
+    </div>
+     <div class="form-group col-md-6">
+      <label for="inputCity">Shipping cost</label>
+      <input type="number" class="form-control" id="inputCity" placeholder="Shipping cost" name="shippingcost" >
+    </div>
+    <div class="form-group col-md-4">
+         <label for="inputState">Category</label>
+<select class="form-select"  aria-label="Default select example" name="subcategory">
+  <option selected>Select subcategory</option>
+{{#each subcategory}}
+<option>{{this.subcategory_name}}</option>
+  {{/each}}
+</select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="">Brand</label>
+      <select class="form-select" aria-label="Default select example" name="brand_name">
+  <option selected>Select Brand</option>
+  {{#each brand}}
+  <option>{{this.brand_name}}</option>
+  {{/each}}
+</select>
+</div>
+     </div>
+      <div class="form-group col-md-12">
+      <label for="inputCity">image url</label>
+      <input type="file" class="form-control" id="inputCity" placeholder="image url" name="img_1" >
+    </div>
+    <div class="form-group col-md-12">
+      {{!-- <label for="inputCity">Shipping cost</label> --}}
+      <input type="file" class="form-control" id="inputCity" placeholder="image url" name="img_2" >
+    </div>
+    <div class="form-group col-md-12">
+      {{!-- <label for="inputCity">Shipping cost</label> --}}
+      <input type="file" class="form-control" id="inputCity" placeholder="" name="img_3" >
+    </div>
+    <div class="form-group col-md-12">
+      {{!-- <label for="inputCity">Shipping cost</label> --}}
+      <input type="file" class="form-control" id="inputCity" placeholder="image url" name="img_4" >
+    </div>
+    
+    
+
+
+<a href="admin/product"><input type="submit" class="btn btn-primary" value="Add Product"></a>
+
+
+
+ 
+</form>
+</div>
+</div>

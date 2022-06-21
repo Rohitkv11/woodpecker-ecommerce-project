@@ -1,0 +1,130 @@
+{{>user-navbar}}  
+
+
+<!--================Cart Area =================-->
+{{!-- {{#if notEmpty}} --}}
+<section class="cart_area padding_top mt-4" id="cartQty" >
+  <div class="container" >
+    <h2 class="mb-4">My Cart</h2>
+    <div class="cart_inner">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col" class="">Product name</th>
+                <th scope="col" class="">Product Price</th>
+             <th scope="col">Productquantity</th>
+              <th scope="col"> Subotal   </th>
+               <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+   
+            {{#each cartItems.products}}
+     
+      
+       
+            <tr>
+              <td>
+                <div class="media">
+                  <div class="d-flex">
+                    <img height="100px" width="125px" src="/images/{{pro_Id.images.[0].image1}}" alt="">
+                    
+                  </div>
+                  <div class="media-body">
+                    <p></p>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <h5>{{pro_Id.name}}</h5>
+              </td>
+               <td>
+                <h5>{{pro_Id.price}}</h5>
+              </td>
+              
+              <td> 
+
+
+                 <div >
+                  <button onclick="changeQuantity('{{this._id}}','{{this.pro_Id._id}}',-1)" type="button"
+                    class="btn btn-light">- </button> <span id="{{this.pro_Id._id}}" >{{this.quantity}}</span> <button type="button"
+                    onclick="changeQuantity('{{this._id }}','{{this.pro_Id._id}}',1)" class="btn btn-light">+ </button>
+
+                </div>
+
+              </td>
+              <td>
+                <h5>₹ {{this.subtotal}}</h5>
+              </td>
+ <td>
+                <button  onclick="deleteCartItem('{{this.pro_Id._id}}')" style="border: none;" ><i class="fa fa-trash" aria-hidden="true" style="font-size: 1.5em" ></i></button>
+              </td>
+
+            </tr>
+
+            {{/each}}
+            {{!-- {{#if notEmpty}}   --}}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              
+              <td>
+                {{!-- <h5>Shipping cost</h5>
+               <hr>
+                 <h5>Discount</h5>
+                 <hr> --}}
+                  <h5>Grand total</h5>
+              </td>
+              <td>
+                 {{!-- <h5>$30.00</h5>
+                <hr>
+                 <h5>$200.00</h5>
+                 <hr> --}}
+                  <h5> ₹ {{cartItems.total}}</h5>
+              </td>
+{{!-- {{/if}} --}}
+            </tr>
+ 
+
+
+          </tbody>
+        </table>
+         <div class="checkout_btn_inner float-right">
+          <a class="btn_1" href="/">Continue Shopping</a>
+          <a class="btn_1 checkout_btn_1" href="/checkout">Proceed to checkout</a>
+        </div>
+      </div>
+    </div>
+</section>
+{{!-- {{else}} --}}
+{{!-- <section class="cart_area padding_top mt-4" id="cartQty" >
+  <div class="container" >
+    <h2 class="mb-4">My Cart</h2>
+    <div class="cart_inner">
+      <div class="table-responsive"> --}}
+      
+{{!-- <h2>Cart Is Empty</h2> --}}
+            
+{{!-- 
+        <div class="checkout_btn_inner float-right">
+          <a class="btn_1" href="/">Continue Shopping</a> --}}
+          {{!-- <a class="btn_1 checkout_btn_1" href="/checkout">Proceed to checkout</a> --}}
+        {{!-- </div>
+      </div>
+    </div>
+</section> --}}
+{{!-- {{/if}} --}}
+<!--================End Cart Area =================-->
+
+
+
+ {{>user-footer}}
+
+
+
+
+<script src="/javascripts/ajax.js"></script>

@@ -1,0 +1,33 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+{{>sidebar}}
+<div id="main" class="mt-5">
+    <h3>Customers</h3>
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+       <th scope="col">Block/Unblock</th>
+       <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each customers}}
+    <tr>
+      <td>{{this.username}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.mobilenumber}}</td>
+   {{#if block}}
+       <td class="d-flex justify-content-between" ><a href="/admin/unblockuser/{{this._id}}" class="btn btn-danger">Unblock</a></td>
+      {{else}}
+      <td class="d-flex justify-content-between" ><a href="/admin/blockuser/{{this._id}}" class="btn btn-danger">Block</a></td>
+      {{/if}}
+      <td></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
