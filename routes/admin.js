@@ -52,12 +52,12 @@ router.get("/adminpanel", verifyAdminLogin, async function (req, res) {
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
   );
-  // const totalIncome = await adminhelpers.getTotalIncome();
-  // const totalOrders = await adminhelpers.getTotalOrders()
+  const totalIncome = await adminhelpers.getTotalIncome();
+  const totalOrders = await adminhelpers.getTotalOrders()
+  const totalCustomers = await adminhelpers.getTotalCustomers()
+  const totalProducts = await adminhelpers.getTotalProducts()
   // const totalCustomers = await adminhelpers.getTotalCustomers()
-  // const totalProducts = await adminhelpers.getTotalProducts()
-  // console.log(totalOrders);
-  res.render("admin/admin_panel");
+  res.render("admin/admin_panel",{totalIncome,totalOrders,totalProducts,totalCustomers});
 });
 
 /*GET products*/
