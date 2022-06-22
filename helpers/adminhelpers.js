@@ -235,22 +235,22 @@ deleteProducts:(proId) => {
     })
 },
 
-getTotalIncome:()=>{
-    return new Promise(async(resolve,reject)=>{
-        let totalIncome = await orderModel.aggregate([
-            {
-                $group:{
-                    _id:null,
-                    grandTotal:{
-                        $sum:'$grandTotal'
-                    }
-                }
-            },
-        ])
-        let sum=totalIncome[0].grandTotal
-        resolve(sum)
-    })
-},
+// getTotalIncome:()=>{
+//     return new Promise(async(resolve,reject)=>{
+//         let totalIncome = await orderModel.aggregate([
+//             {
+//                 $group:{
+//                     _id:null,
+//                     grandTotal:{
+//                         $sum:'$grandTotal'
+//                     }
+//                 }
+//             },
+//         ])
+//         let sum=totalIncome[0].grandTotal
+//         resolve(sum)
+//     })
+// },
 getTotalOrders:()=>{
     return new Promise(async(resolve,reject)=>{
         let totalOrders = await orderModel.count()
