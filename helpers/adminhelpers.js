@@ -179,12 +179,6 @@ blockUser:(userId)=>{
     })
 },
 
-//  blockUser = (userId) => {
-//     return new Promise(async (resolve, reject) => {
-//         const user = await userModel.findOneAndUpdate({ email: data }, { $set: { status: false } })
-//         resolve()
-//     })
-// },
 
 
 unBlockUser:(userId)=>{

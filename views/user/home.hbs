@@ -88,7 +88,7 @@
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
                                         <a href="/productdetails/{{this._id}}">
-                                        <img src="/images/{{this.images.[0].image1}}" alt="">
+                                        <img src="/images/{{this.images.[0].image1}}" height="250px" width="220px" alt="">
                                         </a>
                                         <div class="single_product_text">
                                            <div class="d-flex justify-content-between"> <h4 style="font-weight: 300;" >{{this.name}}</h4>
@@ -160,7 +160,7 @@ console.log(response.count);
             if(response.error){
                swal({
   title: "Wood Pecker",
-  text: "response.error",
+  text: response.error,
   icon: "success",
   button: false,
   timer: 1000
@@ -168,7 +168,7 @@ console.log(response.count);
             }else if(response.msg){
               swal({
   title: "Wood Pecker",
-  text: "response.msg",
+  text: response.msg,
   icon: "success",
   button: false,
   timer: 1000
