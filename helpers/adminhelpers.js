@@ -261,14 +261,14 @@ getTotalOrders:()=>{
 getTotalCustomers:()=>{
     return new Promise(async(resolve,reject)=>{
         let totalCustomers = await userModel.count()
-        console.log(totalCustomers);
+
         resolve(totalCustomers)
     })
 },
 getTotalProducts:()=>{
     return new Promise(async(resolve,reject)=>{
         let totalProducts = await productModel.count()
-        console.log(totalProducts);
+
         resolve(totalProducts)
     })
 },
