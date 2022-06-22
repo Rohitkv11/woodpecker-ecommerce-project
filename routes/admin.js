@@ -10,7 +10,7 @@ const verifyAdminLogin = (req, res, next) => {
     next()
   }
   else {
-    res.redirect('/admin') 
+    res.redirect('/admin')
   }
 }
 
@@ -25,7 +25,7 @@ router.get("/", function (req, res) {
     res.redirect("/admin/adminpanel");
   } else {
     res.render("admin/login");
-    req.session.adminLogin=null
+    req.session.adminLogin = null
   }
 });
 
@@ -38,18 +38,14 @@ router.post("/adminpanel", (req, res) => {
   adminhelpers
     .adminLogin(req.body)
     .then((response) => {
-      // success=response.msg
-      // console.log(success);
       req.session.adminLogin = true;
       res.redirect("/admin/adminpanel");
-      
+
     })
     .catch((error) => {
       adminPasswordErr = error.msgg;
-      console.log(adminPasswordErr);
       adminLoginErr = error.msg;
-      console.log(adminLoginErr);
-      res.redirect("/admin"); 
+      res.redirect("/admin");
     });
 });
 
@@ -68,23 +64,22 @@ router.get("/adminpanel", verifyAdminLogin, async function (req, res) {
 });
 
 /*GET products*/
-router.get("/product",verifyAdminLogin, (req, res) => {
+router.get("/product", verifyAdminLogin, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
   );
-  if(req.session.adminLogin){
-  adminhelpers.getAllProducts().then((response) => {
-    // console.log(response.product);
-    const product = response.product;
-    console.log(product);
-    res.render("admin/product", {admin:req.session.adminLogin, product });
-  });
-}
+  if (req.session.adminLogin) {
+    adminhelpers.getAllProducts().then((response) => {
+      const product = response.product;
+      console.log(product);
+      res.render("admin/product", { admin: req.session.adminLogin, product });
+    });
+  }
 });
 
 /*GET add category*/
-router.get("/addcategory",verifyAdminLogin,async (req, res) => {
+router.get("/addcategory", verifyAdminLogin, async (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
@@ -98,8 +93,9 @@ router.get("/addcategory",verifyAdminLogin,async (req, res) => {
   req.session.categoryErr = null;
 });
 
+
 /*POST add subcategory*/
-router.post("/addsubcategory",verifyAdminLogin, (req, res) => {
+router.post("/addsubcategory", verifyAdminLogin, (req, res) => {
   adminhelpers
     .addSubCategory(req.body)
     .then((response) => {
@@ -108,13 +104,12 @@ router.post("/addsubcategory",verifyAdminLogin, (req, res) => {
     })
     .catch((error) => {
       console.log(error.msg);
-      // req.session.subcategoryErr=error.msg
       res.redirect("/admin/addcategory");
     });
 });
 
 /*GET add brand*/
-router.get("/addbrand",verifyAdminLogin, (req, res) => {
+router.get("/addbrand", verifyAdminLogin, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
@@ -122,8 +117,9 @@ router.get("/addbrand",verifyAdminLogin, (req, res) => {
   res.render("admin/add_brand");
 });
 
+
 /*POST add brand*/
-router.post("/addbrand",verifyAdminLogin, (req, res) => {
+router.post("/addbrand", verifyAdminLogin, (req, res) => {
   adminhelpers
     .addBrand(req.body)
     .then((response) => {
@@ -136,29 +132,26 @@ router.post("/addbrand",verifyAdminLogin, (req, res) => {
     });
 });
 
+
 /*GET add product*/
-router.get("/addproduct",verifyAdminLogin, async (req, res) => {
+router.get("/addproduct", verifyAdminLogin, async (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
   );
   const subcategory = await adminhelpers.getSubCategory();
-  // console.log(category);
   const brand = await adminhelpers.getBrand();
-  // console.log(brand);
   res.render("admin/add_product", { subcategory, brand });
 });
 
 /*POST add category*/
-router.post("/addcategory",verifyAdminLogin, (req, res) => {
+router.post("/addcategory", verifyAdminLogin, (req, res) => {
   adminhelpers
     .addCategory(req.body)
     .then((response) => {
-      console.log(response.msg);
       res.redirect("/admin/addcategory");
     })
     .catch((error) => {
-      console.log(error.msg);
       req.session.categoryErr = error.msg;
       res.redirect("/admin/addcategory");
     });
@@ -175,7 +168,6 @@ router.post(
   verifyAdminLogin,
   (req, res) => {
     console.log(req.files.img_1[0].filename);
-    // console.log(req.body);
     let image1 = req.files.img_1[0].filename;
     let image2 = req.files.img_2[0].filename;
     let image3 = req.files.img_3[0].filename;
@@ -184,14 +176,14 @@ router.post(
     adminhelpers
       .addProduct(req.body, image1, image2, image3, image4)
       .then((response) => {
-        // console.log(response.data);
         res.redirect("/admin/product");
       });
   }
 );
 
+
 /*GET customer page*/
-router.get("/customers",verifyAdminLogin, async (req, res) => {
+router.get("/customers", verifyAdminLogin, async (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
@@ -201,7 +193,7 @@ router.get("/customers",verifyAdminLogin, async (req, res) => {
 });
 
 /*GET Block user*/
-router.get("/blockuser/:id",verifyAdminLogin, (req, res) => {
+router.get("/blockuser/:id", verifyAdminLogin, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
@@ -211,7 +203,7 @@ router.get("/blockuser/:id",verifyAdminLogin, (req, res) => {
   });
 });
 
-router.get("/orders",verifyAdminLogin, async (req, res) => {
+router.get("/orders", verifyAdminLogin, async (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
@@ -220,7 +212,7 @@ router.get("/orders",verifyAdminLogin, async (req, res) => {
   res.render("admin/orders", { orders });
 });
 
-router.get("/unblockuser/:id",verifyAdminLogin, (req, res) => {
+router.get("/unblockuser/:id", verifyAdminLogin, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
@@ -232,7 +224,7 @@ router.get("/unblockuser/:id",verifyAdminLogin, (req, res) => {
 });
 
 
-router.get("/edit-product/:id",verifyAdminLogin, async (req, res) => {
+router.get("/edit-product/:id", verifyAdminLogin, async (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
@@ -246,51 +238,48 @@ router.get("/edit-product/:id",verifyAdminLogin, async (req, res) => {
 
 router.post(
   "/edit-product/:id",
- multer.fields([
+  multer.fields([
     { name: "img_1", maxCount: 1 },
     { name: "img_2", maxCount: 1 },
     { name: "img_3", maxCount: 1 },
     { name: "img_4", maxCount: 1 },
-  ]),verifyAdminLogin,
+  ]), verifyAdminLogin,
   (req, res) => {
     console.log("Editttt");
-    let image1 = req.files.img_1[0].filename;   
-    let image2 = req.files.img_2[0].filename;   
-    let image3 = req.files.img_3[0].filename;   
-    let image4 = req.files.img_4[0].filename;   
-    
- 
-   adminhelpers.editProduct(req.body, image1, image2, image3, image4,req.params.id).then(() => {
- 
+    let image1 = req.files.img_1[0].filename;
+    let image2 = req.files.img_2[0].filename;
+    let image3 = req.files.img_3[0].filename;
+    let image4 = req.files.img_4[0].filename;
+    adminhelpers.editProduct(req.body, image1, image2, image3, image4, req.params.id).then(() => {
       res.redirect("/admin/product");
     });
   }
 );
 
-router.get('/delete-product/:id',verifyAdminLogin,(req,res)=>{
+router.get('/delete-product/:id', verifyAdminLogin, (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
   );
   console.log("kkkkk");
-  adminhelpers.deleteProducts(req.params.id).then(()=>{
+  adminhelpers.deleteProducts(req.params.id).then(() => {
     res.redirect("/admin/product")
   })
 })
 
 
-router.get('/orderdetail/:id',(req,res)=>{
+router.get('/orderdetail/:id', (req, res) => {
   res.header(
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
   );
- const orderSummary = adminhelpers.getOrderDetail(req.session.id)
+  const orderSummary = adminhelpers.getOrderDetail(req.session.id)
 })
 
 
 router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/admin");
-}); 
+});
 
 module.exports = router;
