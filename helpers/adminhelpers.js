@@ -261,7 +261,7 @@ getTotalOrders:()=>{
 getTotalCustomers:()=>{
     return new Promise(async(resolve,reject)=>{
         let totalCustomers = await userModel.count()
-
+        console.log(totalCustomers);
         resolve(totalCustomers)
     })
 },

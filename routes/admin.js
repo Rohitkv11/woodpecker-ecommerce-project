@@ -56,7 +56,6 @@ router.get("/adminpanel", verifyAdminLogin, async function (req, res) {
   const totalOrders = await adminhelpers.getTotalOrders()
   const totalCustomers = await adminhelpers.getTotalCustomers()
   const totalProducts = await adminhelpers.getTotalProducts()
-  // const totalCustomers = await adminhelpers.getTotalCustomers()
   res.render("admin/admin_panel",{totalIncome,totalOrders,totalProducts,totalCustomers});
 });
 
