@@ -68,7 +68,6 @@ router.get("/product", verifyAdminLogin, (req, res) => {
   if (req.session.adminLogin) {
     adminhelpers.getAllProducts().then((response) => {
       const product = response.product;
-      console.log(product);
       res.render("admin/product", { admin: req.session.adminLogin, product });
     });
   }
