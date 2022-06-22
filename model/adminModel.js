@@ -4,7 +4,7 @@ email:{
     type:String
 },
 password:{
-    type:Number
+    type:String
 }  
 })
 const adminModel= mongoose.model("admin",adminSchema)
