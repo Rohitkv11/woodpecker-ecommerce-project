@@ -1,4 +1,3 @@
-// const { response, getMaxListeners } = require("../app");
 var Mongoose = require("mongoose");
 const userModel = require("../model/userModel");
 const productModel = require("../model/productModel");
@@ -11,7 +10,7 @@ const addressModel = require("../model/addressModel");
 const orderModel = require("../model/orderModel");
 const categoryModel = require("../model/category");
 const subcategoryModel = require("../model/subcategoryModel");
-const { aggregate } = require("../model/productModel");
+
 let instance = new Razorpay({
     key_id:'rzp_test_cgNgZJkGmaf45Q',
     key_secret:'PvCbDQBxdMXjfZPtq2ro7khh',

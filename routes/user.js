@@ -1,7 +1,4 @@
 var express = require("express");
-const { redirect } = require("express/lib/response");
-const { response } = require("../app");
-const { generateRazorpay } = require("../helpers/userhelpers");
 const userhelpers = require("../helpers/userhelpers");
 var router = express.Router();
 var User = require("../model/userModel");
