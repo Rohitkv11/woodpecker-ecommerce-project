@@ -159,21 +159,25 @@ console.log(response.count);
         success:(response)=>{
             if(response.error){
                swal({
-  title: "Good job!",
-  text: "You clicked the button!",
+  title: "Wood Pecker",
+  text: "response.error",
   icon: "success",
+  button: false,
+  timer: 1000
 });
             }else if(response.msg){
               swal({
-  title: "Good job!",
-  text: "You clicked the button!",
+  title: "Wood Pecker",
+  text: "response.msg",
   icon: "success",
+  button: false,
+  timer: 1000
 });
                
                 $("#wishlist-count").html(response.count)
             }else{
                swal({
-  title: "Good job!",
+  title: "Wood Pecker",
   text: "You clicked the button!",
   icon: "success",
 });
