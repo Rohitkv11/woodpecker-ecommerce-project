@@ -20,12 +20,14 @@
       <th scope="col">Name</th>
       <th scope="col">Price</th>
       <th scope="col">Stock</th>
-        <th scope="col">Discount</th>
-      <th scope="col">shipping cost</th>
+      
+     
+       <th scope="col">Edit</th>
+       <th scope="col">Delete</th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody >
     {{#each product}}
     <tr>
       <td><img height="150px" width="200px" src="/images/{{this.images.[0].image1}}" alt="">
@@ -33,8 +35,8 @@
       <td>{{this.name}}</td>
       <td>{{this.price}}</td>
       <td>{{this.stock}}</td>
-        <td>{{this.discount}}</td>
-    <td>{{this.shippingcost}}</td>
+        <td style="font-size:25px ;" ><a href="/admin/edit-product/{{this._id}}" style="color:black ;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+      <td style="font-size:25px ;" ><a href="/admin/delete-product/{{this._id}}" style="color:black ;"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
     </tr>
     {{/each}}
   </tbody>

@@ -7,5 +7,5 @@ password:{
     type:Number
 }  
 })
-const adminModel= mongoose.model("Admins",adminSchema)
+const adminModel= mongoose.model("admin",adminSchema)
 module.exports=adminModel;

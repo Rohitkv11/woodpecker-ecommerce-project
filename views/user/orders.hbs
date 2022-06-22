@@ -1,0 +1,30 @@
+{{>user-navbar}}
+<div class="container">
+<table class="table" style="margin-top:100px ;">
+  <thead>
+    <tr>
+      <th scope="col">Ordered On</th>
+         <th scope="col">Amount</th>
+     
+   
+      <th scope="col">Payment Method</th>
+         <th scope="col">Status</th>
+      <th scope="col">Order Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orders}}
+    <tr>
+      <th scope="row">{{this.ordered_on}}</th>
+      <td>{{this.grandTotal}}</td>
+      <td>{{this.payment_Method}}</td>
+      <td>{{this.status}}</td>
+      <td><a href="/order-detail{{this._id}}" style="font-size:10px ;" class="btn_3">view Order</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+
+
+{{>user-footer}}

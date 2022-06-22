@@ -9,7 +9,10 @@ const carModel = require("../model/cartModel");
 const wishlistModel = require("../model/wishlistModel");
 const addressModel = require("../model/addressModel");
 const orderModel = require("../model/orderModel");
-var instance = new Razorpay({
+const categoryModel = require("../model/category");
+const subcategoryModel = require("../model/subcategoryModel");
+const { aggregate } = require("../model/productModel");
+let instance = new Razorpay({
     key_id:'rzp_test_cgNgZJkGmaf45Q',
     key_secret:'PvCbDQBxdMXjfZPtq2ro7khh',
 });
@@ -24,7 +27,7 @@ module.exports = {
         reject({ msge: "user with this email exist" });
       } else {
         const otpCode = await Math.floor(1000 + Math.random() * 8999);
-
+console.log(otpCode);
         // await userModel.findOneAndUpdate({email:data.email},{$set:{otpcode:otpCode}})
         let transporter = await nodemailer.createTransport({
           service: "gmail",
@@ -52,8 +55,7 @@ module.exports = {
   /*signup otp verify*/
   otpverify: (otp, data, otpData) => {
     return new Promise(async (resolve, reject) => {
-      userOtp =
-        (await otpData.otp1) + otpData.otp2 + otpData.otp3 + otpData.otp4;
+      userOtp =(await otpData.otp1) + otpData.otp2 + otpData.otp3 + otpData.otp4;
       if (otp == userOtp) {
         const Password = await bcrypt.hash(data.password, 10);
 
@@ -80,16 +82,19 @@ module.exports = {
 
       if (user) {
         bcrypt.compare(data.password, user.password).then((status) => {
+          if(user.block){
+            reject({msg:"You Have Been Blocked"})
+          }
           if (status) {
             response.user = user;
             response.status = true;
             resolve(response);
           } else {
-            reject({ status: false, msg: "incorrect password" });
+            reject({ status: false, msg: "Incorrect Password" });
           }
         });
       } else {
-        reject({ status: false.valueOf, msgg: "invalid email" });
+        reject({ status: false.valueOf, msgg: "Invalid Email" });
       }
     });
   },
@@ -112,7 +117,7 @@ module.exports = {
       const user = await userModel.findOne({ email: verifyEmail.email });
       if (user) {
         const resetOtp = await Math.floor(1000 + Math.random() * 8999);
-
+console.log(resetOtp);
         // await userModel.findOneAndUpdate({email:data.email},{$set:{otpcode:otpCode}})
         let transporter = await nodemailer.createTransport({
           service: "gmail",
@@ -144,6 +149,7 @@ module.exports = {
   /*verify resend otp*/
   verifyResetOtp: (otp, resetOtp) => {
     return new Promise(async (resolve, reject) => {
+      console.log(resetOtp);
       const userotp = (await otp.otp1) + otp.otp2 + otp.otp3 + otp.otp4;
       if (userotp == resetOtp) {
         resolve({ msg: "correct otp" });
@@ -216,8 +222,15 @@ module.exports = {
 
   /*change product quantity in cart*/
   changeProductQuantity: ({ cart, product, count, quantity }, userId) => {
+    console.log(cart,"cart");
+    console.log(product,"pro");    
+    console.log(count,"count");
+    console.log(quantity,"quantity");
     return new Promise(async (resolve, reject) => {
-      if (count == -1 && quantity == 1) {
+      const Product=await productModel.findById({_id:product})
+      if(quantity>=Product.stock && count==1){
+        resolve({status:true})
+      }else if (count == -1 && quantity == 1) {
         await carModel
           .findOneAndUpdate(
             { "products._id": cart },
@@ -234,7 +247,7 @@ module.exports = {
           )
 
           .then((response) => {
-            resolve(true);
+            resolve({status:false});
           });
       }
     });
@@ -554,8 +567,11 @@ resolve(address)
               
       })
   },
-  placeOrder:(userId,order,products,grandTotal)=>{
+  placeOrder:(userId,order,products,grandTotal,selectedAddress)=>{
   return new Promise(async(resolve,reject)=>{
+    // console.log("proid:"+products.pro_Id);
+    // products = await productModel.findOne({_id:pro_Id}).populate("pro_Id") 
+    // console.log("products::"+products);
       let status = order['payment-method']==='COD'?'placed':'pending'
       console.log(status);
    let newOrder = new orderModel({
@@ -563,8 +579,10 @@ user_Id:userId,
 payment_Method:order['payment-method'],
 products:products,
 grandTotal:grandTotal.total,
+shippingAddress:selectedAddress,
 ordered_on:new Date(),
-status:status
+status:status,
+active:false
    })
    await newOrder.save(async(err,result)=>{
 if(err){
@@ -572,7 +590,7 @@ if(err){
 console.log("order not placed");
 }else{
     await carModel.remove({user_Id:userId})
-    resolve({msg:"order placed successfully",orderId:newOrder._id})
+    resolve({msg:"order placed successfully",orderId:result._id})
     console.log("order placed successfully");
 }
 })
@@ -583,11 +601,22 @@ return new Promise(async(resolve,reject)=>{
    const cart = await carModel.findOne({user_Id:userId})
    resolve(cart.products)
 })
+},
+
+
+    getSelectedAddress:(userId)=>{
+    return new Promise(async(resolve,reject)=>{
+      const address = await addressModel.findOne({user_Id:userId,status:true})
+      // console.log("address:"+address);
+      resolve(address)
+    })
   },
-  generateRazorpay:(orderId,grandTotal)=>{
+
+
+ generateRazorpay:(orderId,grandTotal)=>{
       return new Promise(async(resolve,reject)=>{
        var options = {
-           amount:grandTotal,
+           amount:grandTotal*100,
            currency:"INR",
            receipt:""+orderId
        };
@@ -619,10 +648,127 @@ return new Promise(async(resolve,reject)=>{
               }
             }
             ).then(()=>{
-                resolve()
+                resolve() 
             })
       })
+  },
+  getOrders:(userId)=>{
+    return new Promise(async(resolve,reject)=>{
+const orders = orderModel.find({user_Id:userId}).lean()
+resolve(orders)
+    })
+  },
+  getOrderConfirm:()=>{
+    return new Promise(async(resolve,reject)=>{
+   const shippingAddress = await addressModel.findOne({status:true}).lean()
+      resolve(shippingAddress)
+      console.log(shippingAddress);
+    })
+  },
+  getConfirmProducts:(orderId)=>{
+    return new Promise(async(resolve,reject)=>{
+   const products = await orderModel.findOne({_id:orderId}).populate('products.pro_Id').lean()
+      resolve(products)
+      console.log(products);
+    })
+  },
+  getConfirmOrderSummary:(orderId)=>{
+    return new Promise(async(resolve,reject)=>{
+   const orderSummary = await orderModel.findOne({_id:orderId}).lean()
+      resolve(orderSummary)
+      console.log(orderSummary);
+    })
   }
+  ,
+  getOrderSummary:(orderId)=>{
+    return new Promise(async(resolve,reject)=>{
+    const orderSummary = await orderModel.findOne({_id:orderId}).lean()
+    resolve(orderSummary)
+    })
+  },
+  getOrderedProducts:(orderId)=>{
+    return new Promise(async(resolve,reject)=>{
+      const order = await orderModel.findOne({_id:orderId}).populate('products.pro_Id').lean()
+      console.log(order);     
+      resolve(order)
+  })
+},
+  getAllCategories:()=>{
+  return new Promise(async(resolve,reject)=>{
+    const category = await categoryModel.find({}).lean()
+    console.log(category);
+    resolve(category)
+  })
+},
+getCategories:(categoryId)=>{
+  return new Promise(async(resolve,reject)=>{
+ const category = await categoryModel.findOne({_id:categoryId}).lean()
+    resolve(category)
+  })
+},
+getSubcategories:(categoryId)=>{
+  return new Promise(async(resolve,reject)=>{
+ const subcategory = await subcategoryModel.find({category:categoryId}).lean()
+    resolve(subcategory)
+  })
+},
+getSubcategoriesProducts:(categoryId)=>{
+  return new Promise(async(resolve,reject)=>{
+    const subcategory = await subcategoryModel.find({category:categoryId})
+    const sub = await productModel.find({subcategory:subcategory}).lean()
+// const sub = await subcategoryModel.aggregate([
+// {
+//   $match:{category:categoryId}
+// }
+// ])
+console.log(sub);
+   resolve(sub)
+  })
+},
+getAllProducts:()=>{
+  return new Promise(async(resolve,reject)=>{
+    const products = await productModel.find({}).lean()
+    resolve(products)
+  })
+},
+cancelOrder:(orderId,userId)=>{
+  return new Promise(async(resolve,reject)=>{
+   
+      await orderModel.findOneAndUpdate({_id:orderId},{$set:{status:"cancelled"}})
+      await orderModel.findOneAndUpdate({_id:orderId},{$set:{active:true}})
+      resolve({status:true})
+     
+    
+  })
+},
+getSubCategory:(proId)=>{
+return new Promise(async(resolve,reject)=>{
+const products = await productModel.find({subcategory:proId}).lean()
+console.log(products);
+resolve(products)
+})
+},
+getProductBrand:(proId)=>{
+  return new Promise(async(resolve,reject)=>{
+    const product = await productModel.findOne({_id:proId}).populate("brand").lean()
+    resolve(product.brand)
+    console.log(product.brand);
+  })
+},
+getCategory:(proId)=>{
+  return new Promise(async(resolve,reject)=>{
+    const product = await productModel.findOne({_id:proId}).populate("subcategory").lean()
+    resolve(product.subcategory)
+    console.log(product.subcategory);
+  })
+},
+getCategoryName:(proId,catId)=>{
+  return new Promise(async(resolve,reject)=>{
+    const category = await categoryModel.findOne({_id:catId})
+    resolve(category.category_name)
+  })
+}
+
 }
 
 

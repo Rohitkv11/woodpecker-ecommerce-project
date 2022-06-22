@@ -113,7 +113,86 @@ function selectAddedAddress(addressId){
     })
 }
 
+function addToCart(proId){
+    console.log(proId);
+    $.ajax({
+        url:'/add-to-cart/'+proId,
+        method:'get',
+        success:(response)=>{
+            if(response.error){
+                swal({
+  title: "Good job!",
+  text: response.error,
+  icon: "success",
+  button: false,
+  timer: 1000
+
+});
+            }else if(response.msg){
+                swal({
+  title: "Good job!",
+  text: response.msg,
+  icon: "success",
+   button: false,
+  timer: 1000
+});
+console.log(response.count);
+                $("#cart-count").html(response.count)
+            }else{
+                alert("something went wrong")
+            }
+        }
+    })
+}
+
+ function addToWishlist(proId){
+    console.log(proId);
+    $.ajax({
+        url:'/addtowishlist/'+proId,
+        method:'get',
+        success:(response)=>{
+            if(response.error){
+               swal({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success",
+});
+            }else if(response.msg){
+              swal({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success",
+});
+               
+                $("#wishlist-count").html(response.count)
+            }else{
+               swal({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success",
+});
+            }
+        }
+    })
+}
 
 
-
+function cancelOrder(orderId) {
+    if (confirm("Are you sure?")) {
+        cancellingOrder(orderId)
+    }
+    return false;
+}
+function cancellingOrder(orderId){
+    console.log(orderId);
+    $.ajax({
+        url:'/ordercancel/'+orderId,
+        method:'get',
+        success:(response)=>{
+            location.reload()
+            console.log(response);
+         
+        }
+    })
+}
 

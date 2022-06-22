@@ -10,9 +10,20 @@ products:[{
     quantity:{type:Number,default: 1},
     subtotal:{type:Number,default:0}
 }],
+shippingAddress: {
+    username: { type: String },
+    mobilenumber: { type: Number },
+    housename: { type: String },
+    Pincode: { type: Number },
+    area:{type:String},
+    city: { type: String },
+    state: { type: String },
+    country: { type: String }
+  },
 grandTotal:{type:Number,default:0},
 ordered_on:{type:Date},
-status:{type:String}
+status:{type:String},
+active:{type:Boolean,default:false}
 })
 const orderModel = Mongoose.model("order",orderSchema)
 module.exports=orderModel;

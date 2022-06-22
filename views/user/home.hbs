@@ -130,12 +130,17 @@ function addToCart(proId){
   title: "Good job!",
   text: response.error,
   icon: "success",
+  button: false,
+  timer: 1000
+
 });
             }else if(response.msg){
                 swal({
   title: "Good job!",
   text: response.msg,
   icon: "success",
+   button: false,
+  timer: 1000
 });
 console.log(response.count);
                 $("#cart-count").html(response.count)

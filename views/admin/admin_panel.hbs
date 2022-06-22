@@ -1,6 +1,288 @@
 
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	    <style>
+        body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #e6e8ed;
+  color: #666666;
+  font-family: "Montserrat", sans-serif;
+}
+.material-icons-outlined {
+  vertical-align: middle;
+  line-height: 1px;
+}
+.text-primary {
+  color: #666666;
+}
+.text-blue {
+  color: #246dec;
+}
+
+.text-red {
+  color: #cc3c43;
+}
+
+.text-green {
+  color: #367952;
+}
+
+.text-orange {
+  color: #f5b74f;
+}
+
+.font-weight-bold {
+  font-weight: 600;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 3fr;
+  grid-template-areas:
+    "sidebar header header header"
+    "sidebar main main main";
+  height: 100vh;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.header {
+  grid-area: header;
+  height: 70px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px 0 30px;
+  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+}
+
+.menu-icon {
+  display: none;
+}
+
+
+/* ---------- SIDEBAR ---------- */
+
+#sidebar {
+  grid-area: sidebar;
+  height: 100%;
+  background-color: #21232d;
+  color: #9799ab;
+  overflow-y: auto;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+.sidebar-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 20px 20px;
+  margin-bottom: 30px;
+}
+
+.sidebar-title > span {
+  display: none;
+}
+
+.sidebar-brand {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sidebar-list {
+  padding: 0;
+  margin-top: 15px;
+  list-style-type: none;
+}
+
+.sidebar-list-item {
+  padding: 20px 20px 20px 20px;
+}
+
+.sidebar-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.sidebar-responsive {
+  display: inline !important;
+  position: absolute;
+}
+
+
+/* ---------- MAIN ---------- */
+
+.main-container {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+}
+
+.main-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-title > p {
+  font-size: 20px;
+}
+
+.main-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border: 1px solid #d2d2d3;
+  border-radius: 5px;
+  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+}
+
+.card:first-child {
+  border-left: 7px solid #246dec;
+}
+
+.card:nth-child(2) {
+  border-left: 7px solid #f5b74f;
+}
+
+.card:nth-child(3) {
+  border-left: 7px solid #367952;
+}
+
+.card:nth-child(4) {
+  border-left: 7px solid #cc3c43;
+}
+
+.card > span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-inner > p {
+  font-size: 18px;
+}
+
+.card-inner > span {
+  font-size: 35px;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.charts-card {
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding: 25px;
+  box-sizing: border-box;
+  -webkit-column-break-inside: avoid;
+  border: 1px solid #d2d2d3;
+  border-radius: 5px;
+  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+/* ---------- SCROLLBARS ---------- */
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #a5aaad;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4f35a1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a5aaad;
+}
+
+
+/* ---------- MEDIA QUERIES ---------- */
+
+
+/* Medium <= 992px */
+@media screen and (max-width: 992px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 3fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+  .menu-icon {
+    display: inline;
+  }
+
+  .sidebar-title > span {
+    display: inline;
+  }
+}
+
+/* Small <= 768px */
+@media screen and (max-width: 768px) {
+  .main-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  .charts {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+}
+
+/* Extra Small <= 576px */
+@media screen and (max-width: 576px) {
+  .header-left {
+    display: none;
+  }
+}
+    </style>
 </head>
 
 	<div class="body">
@@ -17,8 +299,8 @@
 		<div class="col-div-6">
 		<div class="profile">
 
-			<img src="images/user.png" class="pro-img" />
-			<p>Admin </p>
+			<a href="/admin/logout"> <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button></a>
+			
 		</div>
 	</div>
 		<div class="clearfix"></div>
@@ -29,92 +311,48 @@
 		
 		<div class="col-div-3">
 			<div class="box">
-				<p>67<br/><span>Customers</span></p>
-				<i class="fa fa-users box-icon"></i>
+				<p>{{totalCustomers}}<br/><span>Customers</span></p>
+				<i class="fa fa-users box-icon" style="color:white"></i>
 			</div>
 		</div>
 		<div class="col-div-3">
 			<div class="box">
-				<p>88<br/><span>Projects</span></p>
-				<i class="fa fa-list box-icon"></i>
+				<p>{{totalProducts}}<br/><span>Products</span></p>
+				<i class="fa fa-tasks box-icon " style="color:white; font-size:35px;"></i>
 			</div>
 		</div>
 		<div class="col-div-3">
 			<div class="box">
-				<p>99<br/><span>Orders</span></p>
-				<i class="fa fa-shopping-bag box-icon"></i>
+				<p>{{totalOrders}}<br/><span>Orders</span></p>
+				<i class="fa fa-shopping-bag box-icon" style="color:white"></i>
 			</div>
 		</div>
 		<div class="col-div-3">
 			<div class="box">
-				<p>78<br/><span>Tasks</span></p>
-				<i class="fa fa-tasks box-icon"></i>
+				<p>{{totalIncome}}<br/><span>Total Income</span></p>
+				<i class="fa fa-credit-card-alt box-icon" style="color:white; font-size:35px;" ></i>
 			</div>
 		</div>
 		<div class="clearfix"></div>
 		<br/><br/>
-		{{!-- <div class="col-div-8">
-			<div class="box-8">
-			<div class="content-box">
-				<p>Top Selling Projects <span>Sell All</span></p>
-				<br/>
-				<table>
-	  <tr>
-	    <th>Company</th>
-	    <th>Contact</th>
-	    <th>Country</th>
-	  </tr>
-	  <tr>
-	    <td>Alfreds Futterkiste</td>
-	    <td>Maria Anders</td>
-	    <td>Germany</td>
-	  </tr>
-	  <tr>
-	    <td>Centro comercial Moctezuma</td>
-	    <td>Francisco Chang</td>
-	    <td>Mexico</td>
-	  </tr>
-	  <tr>
-	    <td>Ernst Handel</td>
-	    <td>Roland Mendel</td>
-	    <td>Austria</td>
-	  </tr>
-	  <tr>
-	    <td>Island Trading</td>
-	    <td>Helen Bennett</td>
-	    <td>UK</td>
-	  </tr>
-	  
-	  
-	</table>
-			</div>
-		</div>
-		</div> --}}
-
-		<div class="col-div-4">
-			<div class="box-4">
-			<div class="content-box">
-				<p>Total Sale <span>Sell All</span></p>
-
-				<div class="circle-wrap">
-	    <div class="circle">
-	      <div class="mask full">
-	        <div class="fill"></div>
-	      </div>
-	      <div class="mask half">
-	        <div class="fill"></div>
-	      </div>
-	      <div class="inside-circle"> 70% </div>
-	    </div>
-	  </div>
-			</div>
-		</div>
-		</div>
-			
-		<div class="clearfix"></div>
-	</div>
 
 
+
+	<div class="charts">
+
+    <div class="charts-card">
+      <p class="chart-title">Top 5 Products</p>
+      <div id="bar-chart"></div>
+    </div>
+
+    <div class="charts-card">
+      <p class="chart-title">Purchase and Sales Orders</p>
+      <div id="area-chart"></div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 
@@ -140,6 +378,129 @@
 	     $(".nav").css('display','block');
 	      $(".nav2").css('display','none');
 	 });
+
+
+
+	     // SIDEBAR TOGGLE
+
+var sidebarOpen = false;
+var sidebar = document.getElementById("sidebar");
+
+function openSidebar() {
+  if(!sidebarOpen) {
+    sidebar.classList.add("sidebar-responsive");
+    sidebarOpen = true;
+  }
+}
+
+function closeSidebar() {
+  if(sidebarOpen) {
+    sidebar.classList.remove("sidebar-responsive");
+    sidebarOpen = false;
+  }
+}
+
+
+
+// ---------- CHARTS ----------
+
+// BAR CHART
+var barChartOptions = {
+  series: [{
+    data: [{{totalCustomers}},{{totalOrders}},{{totalProducts}}]
+  }],
+  chart: {
+    type: 'bar',
+    height: 350,
+    toolbar: {
+      show: false
+    },
+  },
+  colors: [
+    "#246dec",
+    "#cc3c43",
+    "#367952",
+    "#f5b74f",
+    "#4f35a1"
+  ],
+  plotOptions: {
+    bar: {
+      distributed: true,
+      borderRadius: 4,
+      horizontal: false,
+      columnWidth: '40%',
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  legend: {
+    show: false
+  },
+  xaxis: {
+    categories: ["Customers", "Orders", "Products"],
+  },
+  yaxis: {
+    title: {
+      text: "Count"
+    }
+  }
+};
+
+var barChart = new ApexCharts(document.querySelector("#bar-chart"), barChartOptions);
+barChart.render();
+
+
+// AREA CHART
+var areaChartOptions = {
+  series: [{
+    name: '',
+    data: [{{totalIncome}},{{totalOrders}}]
+  }, ],
+  chart: {
+    height: 350,
+    type: 'area',
+    toolbar: {
+      show: false,
+    },
+  },
+  colors: ["#4f35a1", "#246dec"],
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: 'smooth'
+  },
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+  markers: {
+    size: 0
+  },
+  yaxis: [
+    {
+      title: {
+        text: 'Total Income ',
+      },
+    },
+    {
+      opposite: true,
+      title: {
+        text: 'Sales Orders',
+      },
+    },
+  ],
+  tooltip: {
+    shared: true,
+    intersect: false,
+  }
+};
+
+var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartOptions);
+areaChart.render();
+
+
+
+
+
 
 	</script>
 

@@ -31,55 +31,62 @@
 </head>
 
 <body>
-{{>user-navbar}} 
+{{>user-navbar wishlistCount=wishlistCount}} 
 
   <!--================Single Product Area =================-->
+   <div class="container mt-5">
+  <div class="row">
   <div class="product_image_area section_padding mt-5">
-    <div class="container">
+   
       <div class="row s_product_inner justify-content-between">
-        <div class="col-lg-7 col-xl-7">
+        <div class="col-lg-8 ">
           <div class="product_slider_img">
             <div id="vertical">
-              <div data-thumb="{{productDetail.images.[0].image1}}">
-                <img src="{{productDetail.images.[0].image1}}"/>
+              <div data-thumb="/images/{{productDetail.images.[0].image1}}">
+               <img src="/images/{{productDetail.images.[0].image1}}" alt="">
               </div>
-              <div data-thumb="img/product/single-product/product_1.png">
-                <img src="img/product/single-product/product_1.png" />
+              <div data-thumb="/images/{{productDetail.images.[0].image2}}">
+                <img src="/images/{{productDetail.images.[0].image2}}" />
               </div>
-              <div data-thumb="img/product/single-product/product_1.png">
-                <img src="img/product/single-product/product_1.png" />
+              <div data-thumb="/images/{{productDetail.images.[0].image3}}">
+                <img src="/images/{{productDetail.images.[0].image3}}" />
               </div>
-              <div data-thumb="img/product/single-product/product_1.png">
-                <img src="img/product/single-product/product_1.png" />
+              <div data-thumb="/images/{{productDetail.images.[0].image4}}">
+                <img src="/images/{{productDetail.images.[0].image4}}" />
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-5 col-xl-4">
+        <div class="col-lg-4 ">
           <div class="s_product_text">
-            <h5>previous <span>|</span> next</h5>
             <h3>{{productDetail.name}}</h3>
             <h2>{{productDetail.price}}</h2>
             <ul class="list">
               <li>
                 <a class="active" href="#">
-                  <span>Category</span> : </a>
+                  <span>Category</span> : {{categoryName}}</a>
               </li>
               <li>
-                <a href="#"> <span>Availibility</span> : In Stock</a>
+                <a class="active" href="#">
+                  <span>Brand</span> : {{brand.brand_name}}</a>
+              </li>
+              <li>
+                <a href="#" class="active">
+                   <span>Availibility</span> : {{productDetail.stock}}</a>
               </li>
             </ul>
             <p>
               {{productDetail.description}}
             </p>
             <div class="card_area d-flex justify-content-between align-items-center">
-              <a href="#" class="btn_3">add to cart</a>
-              <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+              <button onclick="addToCart('{{productDetail._id}}')" href="#" class="btn_3">add to cart</button>
+              <button onclick="addToWishlist('{{productDetail._id}}')"  style="background-color: transparent; border:none; href="#" class="like_us"> <i class="ti-heart"></i> </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <!--================End Single Product Area =================-->
 
@@ -88,37 +95,14 @@
  
 
   <!--::footer_part start::-->
-  <footer class="footer_part">
-   
-    <div class="copyright_part">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="copyright_text">
-              <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="footer_icon social_icon">
-              <ul class="list-unstyled">
-                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
-                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+
+{{>user-footer}}
   <!--::footer_part end::-->
                                     
 
   <!-- jquery plugins here-->
   <!-- jquery -->
+  <script src="/javascripts/ajax.js"></script>
   <script src="/javascripts/jquery-1.12.1.min.js"></script>
   <script src=""></script>
   <!-- popper js -->

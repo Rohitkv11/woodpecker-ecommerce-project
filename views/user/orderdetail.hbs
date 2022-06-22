@@ -1,0 +1,181 @@
+{{! <body> }}
+<!--::header part start::-->
+<header class="main_menu home_menu">
+  <div class="container mt-4" >
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="/"> <h2>Wood Pecker</h2> </a>
+          {{!-- <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+          </button> --}}
+
+          <div
+            class="collapse navbar-collapse main-menu-item"
+            id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              {{!-- <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li> --}}
+              {{!-- <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li> --}}
+            </ul>
+          </div>
+          <div class="hearer_icon d-flex">
+          
+            
+            {{! <div class="dropdown cart">
+                            <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cart-plus"></i><span class="badge text-bg-dark">11</span>
+                            </a> 
+                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="single_product">
+
+                                </div>
+                            </div> 
+                            
+                        </div> }}
+           
+           
+            {{!-- <a href=""> <i class="fa fa-user" style="font-size: 1.5em"></i></a> --}}
+            {{#if user}}
+              <div>
+                 <a class="text-dark p-4" href="/profile">My Account</a>
+                 <a class="text-dark p-4" href="/orders">My Orders</a>
+                <a class="text-dark p-4" href="/logout">Logout</a>
+               </div>
+            {{else}}
+
+            <div>  <a class="text-dark p-4  " href="/login"> Login</i></a></div>
+            {{/if}}
+
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="search_input" id="search_input_box">
+    <div class="container">
+      <form class="d-flex justify-content-between search-inner">
+        <input
+          type="text"
+          class="form-control"
+          id="search_input"
+          placeholder="Search Here"
+        />
+        <button type="submit" class="btn"></button>
+        <span class="ti-close" id="close_search" title="Close Search"></span>
+      </form>
+    </div>
+  </div>
+</header>
+
+  <!--================ confirmation part start =================-->
+  <section class="confirmation_part padding_top mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+            <h4>Shipping Address</h4>
+            <ul>
+              <li>
+                <p>Name</p><span>: {{orderSummary.shippingAddress.username}} </span>
+              </li>
+              <li>
+                <p>Mobile Number</p><span>: {{orderSummary.shippingAddress.mobilenumber}}</span>
+              </li>
+              <li>
+                <p>House Name</p><span>: {{orderSummary.shippingAddress.housename}}</span>
+              </li>
+              <li>
+                <p>Area</p><span>: {{orderSummary.shippingAddress.area}}</span>
+              </li>
+               <li>
+                <p>City</p><span>: {{orderSummary.shippingAddress.city}}</span>
+              </li>
+               <li>
+                <p>State</p><span>: {{orderSummary.shippingAddress.state}}</span>
+              </li>
+               <li>
+                <p>country</p><span>: {{orderSummary.shippingAddress.country}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+            <h4>Order Info</h4>
+            <ul>
+              <li>
+                <p>Payment Method</p><span>: {{orderSummary.payment_Method}}</span>
+              </li>
+              <li>
+                <p>Amount</p><span>: {{orderSummary.grandTotal}}</span>
+              </li>
+              <li>
+                <p>Ordered On</p><span>: {{orderSummary.ordered_on}}</span>
+              </li>
+             
+            </ul>
+          </div>
+          {{#if orderSummary.active}}
+          <button onclick="cancelOrder('{{orderSummary._id}}')" href="" class="btn_3">Cancelled</button>
+          {{else}}
+          <button onclick="cancelOrder('{{orderSummary._id}}')" href="" class="btn_3">Cancel Order</button>
+          {{/if}}
+           {{!-- <button onclick="" href="" class="btn_3">Cancelled</button> --}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="order_details_iner">
+            <h3>Order Details</h3>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="2">Product</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              
+              <tbody>
+                {{#each productDetail.products}}
+                <tr>
+                  <th colspan="2"><span>{{pro_Id.name}}</span></th>
+                  <th>x {{this.quantity}}</th>
+                  <th> <span>{{this.subtotal}}</span></th>
+                </tr>
+               
+               {{/each}}
+                
+                
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="col" colspan="3">Total</th>
+                  <th scope="col">{{productDetail.grandTotal}}</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================ confirmation part end =================-->
+{{>user-footer}}
+<script src="/javascripts/ajax.js"></script>

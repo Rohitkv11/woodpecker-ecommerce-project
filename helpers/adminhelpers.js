@@ -7,8 +7,9 @@ const categoryModel = require('../model/category')
 const subcategoryModel = require("../model/subcategoryModel")
 const brandModel = require('../model/brandModel')
 const cartModel = require('../model/cartModel')
+const orderModel = require('../model/orderModel')
 // const userhelpers = require('./userhelpers')
-module.exports={
+    module.exports={
 
         adminLogin:(data)=>{
             let response={}
@@ -174,14 +175,106 @@ getAllCustomers:()=>{
 blockUser:(userId)=>{
     return new Promise(async(resolve,reject)=>{
      const userBlocked = await userModel.findByIdAndUpdate({_id:userId},{$set:{block:true}})
-        resolve({block:true})
+        resolve()
     })
 },
+
+//  blockUser = (userId) => {
+//     return new Promise(async (resolve, reject) => {
+//         const user = await userModel.findOneAndUpdate({ email: data }, { $set: { status: false } })
+//         resolve()
+//     })
+// },
+
+
 unBlockUser:(userId)=>{
     console.log("sdfghjkl;");
     return new Promise(async(resolve,reject)=>{
      const userUnBlocked = await userModel.findByIdAndUpdate({_id:userId},{$set:{block:false}})
         resolve({block:false})
     })
+},
+getAllOrders:()=>{
+return new Promise(async(resolve,reject)=>{
+const orders = await orderModel.find({}).lean()
+resolve(orders)
+})
+},
+getEditDetails:(proId)=>{
+    return new Promise(async(resolve,reject)=>{
+        const productDetail = await productModel.findOne({_id:proId}).lean()
+        resolve(productDetail) 
+    })
+},
+ editProduct:(data, image1, image2, image3,image4, proId)=>{
+    console.log("locallll");
+    return new Promise(async (resolve,reject) => {
+        const product = await productModel.findOneAndUpdate({_id:proId }, {
+            $set: {
+               
+                name:data.name,
+                    price:data.price,
+                    description:data.description,
+                    stock:data.stock,
+                    discount:data.discount,
+                    shippingcost:data.shippingcost,
+                    subcategory:data._id,
+                    brand:data._id,
+                images: { image1, image2, image3,image4 }
+            }
+        })
+        resolve()
+    })
+},
+
+
+deleteProducts:(proId) => {
+    return new Promise(async (resolve, reject) => {
+        await productModel.findOneAndDelete({_id:proId })
+        resolve()
+    })
+},
+
+getTotalIncome:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let totalIncome = await orderModel.aggregate([
+            {
+                $group:{
+                    _id:null,
+                    grandTotal:{
+                        $sum:'$grandTotal'
+                    }
+                }
+            },
+        ])
+        let sum=totalIncome[0].grandTotal
+        resolve(sum)
+    })
+},
+getTotalOrders:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let totalOrders = await orderModel.count()
+        console.log(totalOrders);
+        resolve(totalOrders)
+    })
+},
+getTotalCustomers:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let totalCustomers = await userModel.count()
+        console.log(totalCustomers);
+        resolve(totalCustomers)
+    })
+},
+getTotalProducts:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let totalProducts = await productModel.count()
+        console.log(totalProducts);
+        resolve(totalProducts)
+    })
+},
+getOrderDetail:(orderId)=>{
+    return new Promise(async(resolve,reject)=>{
+        
+    })
 }
-}
+    }
