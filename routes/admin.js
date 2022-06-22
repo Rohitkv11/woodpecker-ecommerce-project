@@ -210,7 +210,6 @@ router.get("/unblockuser/:id", verifyAdminLogin, (req, res) => {
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
   );
-  console.log(req.params.id);
   adminhelpers.unBlockUser(req.params.id).then((response) => {
     res.redirect("/admin/customers");
   });
