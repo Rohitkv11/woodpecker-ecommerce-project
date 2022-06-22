@@ -23,8 +23,6 @@
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "razorpay": "^2.8.1",
-    "session": "^0.1.0",
-    "sweetalert": "^2.1.2",
-    "twilio": "^3.77.0"
+    "session": "^0.1.0"
   }
 }
