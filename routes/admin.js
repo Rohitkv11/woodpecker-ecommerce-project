@@ -231,13 +231,6 @@ router.get("/unblockuser/:id",verifyAdminLogin, (req, res) => {
   });
 });
 
-// router.get("/edit-product/:id", async (req, res) => {
-//   const subcategory = await adminhelpers.getSubCategory();
-//   const brand = await adminhelpers.getBrand();
-//   const productDetail = await adminhelpers.getEditDetails(req.params.id);
-//   console.log(productDetail);
-//   res.render("admin/edit_product", { productDetail, subcategory, brand });
-// });
 
 router.get("/edit-product/:id",verifyAdminLogin, async (req, res) => {
   res.header(
@@ -266,9 +259,9 @@ router.post(
     let image3 = req.files.img_3[0].filename;   
     let image4 = req.files.img_4[0].filename;   
     
-    console.log(req.body,req.params.id);
+ 
    adminhelpers.editProduct(req.body, image1, image2, image3, image4,req.params.id).then(() => {
-     console.log("Editted");
+ 
       res.redirect("/admin/product");
     });
   }
@@ -281,7 +274,6 @@ router.get('/delete-product/:id',verifyAdminLogin,(req,res)=>{
   );
   console.log("kkkkk");
   adminhelpers.deleteProducts(req.params.id).then(()=>{
-    console.log("product deleted");
     res.redirect("/admin/product")
   })
 })
@@ -297,7 +289,6 @@ router.get('/orderdetail/:id',(req,res)=>{
 
 
 router.get("/logout", (req, res) => {
-  console.log("lllllll");
   req.session.destroy();
   res.redirect("/admin");
 }); 
