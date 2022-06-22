@@ -4,24 +4,23 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs=require('express-handlebars')
-const jwt=require('jsonwebtoken')
 const Mongoose = require('mongoose')
+const dotenv = require('dotenv')
 const session=require('express-session')
 const bodyParser=require('body-parser')
-const swal = require('sweetalert')
 const adminRouter = require('./routes/admin');
 const userRouter = require('./routes/user');
 const app = express();
+dotenv.config()
 
 //mongoose connection
-Mongoose.connect('mongodb://localhost:27017/ecommerce',{useNewUrlParser:true})
-Mongoose.connection.on("error",err=>{
-  console.log(err);
-})
-Mongoose.connection.on("connected",(err,res)=>{
-  console.log("mongoose is connected");
-})
-
+Mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((_) => {
+   console.log("mongoose is connected");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 
 // view engine setup
