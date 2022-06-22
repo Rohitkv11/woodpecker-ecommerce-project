@@ -253,7 +253,6 @@ router.get("/delete-product/:id", verifyAdminLogin, (req, res) => {
     "Cache-Control",
     "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
   );
-  console.log("kkkkk");
   adminhelpers.deleteProducts(req.params.id).then(() => {
     res.redirect("/admin/product");
   });
