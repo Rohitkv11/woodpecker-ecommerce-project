@@ -20,7 +20,6 @@ function changeQuantity(cartId,proId,count){
           }else{
             
               document.getElementById(proId).innerHTML=quantity+count
-            //   $('#cartQty').load(window.location.href+ '#cartQty')
             location.reload()
           }
         }
@@ -29,9 +28,21 @@ function changeQuantity(cartId,proId,count){
 
 
 function deleteItem(proId) {
-    if (confirm("Are you sure?")) {
-        removeFromWishlist(proId)
-    }
+    swal({
+        title: "Wood Pecker",
+        text: "Are sure You want to remove this product",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+       
+        if (willDelete) {
+            removeFromWishlist(proId)
+        } else {
+         console.log("something went wrong")
+        }
+      });
     return false;
 }
 function removeFromWishlist(proId){
@@ -56,9 +67,21 @@ function removeFromWishlist(proId){
 }
 
 function deleteCartItem(proId) {
-    if (confirm("Are you sure?")) {
-        removeFromCart(proId)
-    }
+    swal({
+        title: "Wood Pecker",
+        text: "Are sure You want to remove this product",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+       
+        if (willDelete) {
+            removeFromCart(proId)
+        } else {
+         console.log("something went wrong")
+        }
+      });
     return false;
 }
 function removeFromCart(proId){
@@ -121,7 +144,7 @@ function addToCart(proId){
         success:(response)=>{
             if(response.error){
                 swal({
-  title: "Good job!",
+  title: "Wood Pecker",
   text: response.error,
   icon: "success",
   button: false,
@@ -130,7 +153,7 @@ function addToCart(proId){
 });
             }else if(response.msg){
                 swal({
-  title: "Good job!",
+  title: "Wood Pecker",
   text: response.msg,
   icon: "success",
    button: false,
@@ -153,24 +176,24 @@ console.log(response.count);
         success:(response)=>{
             if(response.error){
                swal({
-  title: "Good job!",
-  text: "You clicked the button!",
+  title: "Wood Pecker",
+  text: response.error,
   icon: "success",
+  button: false,
+  timer: 1000
 });
             }else if(response.msg){
               swal({
-  title: "Good job!",
-  text: "You clicked the button!",
+  title: "Wood Pecker",
+  text: response.msg,
   icon: "success",
+  button: false,
+  timer: 1000
 });
                
                 $("#wishlist-count").html(response.count)
             }else{
-               swal({
-  title: "Good job!",
-  text: "You clicked the button!",
-  icon: "success",
-});
+              console.log("something went wrong")
             }
         }
     })

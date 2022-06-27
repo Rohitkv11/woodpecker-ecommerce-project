@@ -479,17 +479,19 @@ res.render('user/subcategory')
 
 router.post('/search',verifyLogin, async (req, res) => {
   console.log("kjhjhkjh");
-  let searchText = req.body['search_text'];
+  
+  let searchText = req.body['search_input'];
+  console.log(searchText);
   console.log(searchText + "ooooooooooooooooooo");
   try {
     let products=await userhelpers.getAllProducts()
     console.log("ererererer");
     console.log(products);
   if (searchText) {
-   let product=products.filter((u) => u.name.includes(searchText));
+   let searchProduct=products.filter((u) => u.name.includes(searchText));
    console.log("nmnmnmnmnmnmnm");
-      console.log(product);
-      res.render('user/home',{product,user:req.session.user})  
+
+      res.render('user/home',{searchProduct,user:req.session.user,searchText})  
     } 
   } catch (err) {
    console.log(err);

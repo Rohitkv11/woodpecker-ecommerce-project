@@ -1,9 +1,39 @@
  {{>user-navbar}}
   <!-- Header part end-->
-    
-    
+
+
+ 
+     {{#if searchProduct}} 
+   <div class="container" style="margin-top: 135px;">
+          <div class="row align-items-center">
+                                {{#each searchProduct}}
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="single_product_item">
+                                        <a href="/productdetails/{{this._id}}">
+                                        <img src="/images/{{this.images.[0].image1}}" height="250px" width="220px" alt="">
+                                        </a>
+                                        <div class="single_product_text">
+                                           <div class="d-flex justify-content-between"> <h4 style="font-weight: 300;" >{{this.name}}</h4>
+                                              <button onclick="addToWishlist('{{this._id}}')"  style="background-color: transparent; border:none; font-size: 1.5em;" class=""><i class="fa fa-heart-o" aria-hidden="true"></i></button></div>
+                                            <h3 style="font-weight: bolder" > ₹ {{this.price}}</h3>
+                                            <div class="">
+                                            <button onclick="addToCart('{{this._id}}')"  class="button-2 p-2">+ add to cart</button><br><br>
+                                          
+
+</div>
+
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                            </div>
+                     {{/if}}
+                      
 
     <!-- banner part start   carousel-->
+    {{#if product}}
     <section class="banner_part">
         <div class="container">
             <div class="row align-items-center">
@@ -72,7 +102,7 @@
    
 
     <!-- product_list start-->
-      <section class="product_li    st section_padding">
+      <section class="product_list section_padding">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -83,7 +113,7 @@
             </div>
            
                         {{!-- <div class="single_product_list_slider"> --}}
-                            <div class="row align-items-center justify-content-between">
+                            <div class="row align-items-center">
                                 {{#each product}}
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
@@ -112,81 +142,15 @@
             </div>
         </div>
     </section>
-
-
+    {{/if}}
+  {{#unless searchProduct}}
+  {{#unless product}}
+  <div class="container" style="margin-top:220px; height:65vh ;">
+                      <h2>We couldn't find any results for "{{searchText}}"</h2>
+                      {{/unless}} 
+                         {{/unless}} 
+</div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!--::footer_part start::-->
+  <script src="/javascripts/ajax.js"></script>
      {{>user-footer}}
-     <script>
-        
-function addToCart(proId){
-    console.log(proId);
-    $.ajax({
-        url:'/add-to-cart/'+proId,
-        method:'get',
-        success:(response)=>{
-            if(response.error){
-                swal({
-  title: "Good job!",
-  text: response.error,
-  icon: "success",
-  button: false,
-  timer: 1000
-
-});
-            }else if(response.msg){
-                swal({
-  title: "Good job!",
-  text: response.msg,
-  icon: "success",
-   button: false,
-  timer: 1000
-});
-console.log(response.count);
-                $("#cart-count").html(response.count)
-            }else{
-                alert("something went wrong")
-            }
-        }
-    })
-}
-
- function addToWishlist(proId){
-    console.log(proId);
-    $.ajax({
-        url:'/addtowishlist/'+proId,
-        method:'get',
-        success:(response)=>{
-            if(response.error){
-               swal({
-  title: "Wood Pecker",
-  text: response.error,
-  icon: "success",
-  button: false,
-  timer: 1000
-});
-            }else if(response.msg){
-              swal({
-  title: "Wood Pecker",
-  text: response.msg,
-  icon: "success",
-  button: false,
-  timer: 1000
-});
-               
-                $("#wishlist-count").html(response.count)
-            }else{
-               swal({
-  title: "Wood Pecker",
-  text: "You clicked the button!",
-  icon: "success",
-});
-            }
-        }
-    })
-}
-     </script>
-
-    {{!-- <script src="/javascripts/ajax.js"></script>   --}}
-
 
