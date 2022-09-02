@@ -19,7 +19,7 @@ let instance = new Razorpay({
 
 /*user signup*/
 module.exports = {
-  dosignup: (data) => {
+    dosignup: (data) => {
     return new Promise(async (resolve, reject) => {
       const user = await userModel.findOne({ email: data.email });
       if (user) {
