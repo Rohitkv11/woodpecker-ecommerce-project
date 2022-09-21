@@ -68,7 +68,7 @@ Deployed in DigitalOcean with Nginx reverse proxy
 
 ## Features
 
-The application displays a virtual phones and laptops store that contains virtual products and its information.
+The application displays home and office furnitures and its information.
 
 Users can do the following:
 
@@ -80,7 +80,7 @@ Users can do the following:
 - To checkout, a user must be logged in
 - Checkout information is processed using razorpay and the payment is send to the admin
 - The profile contains all the orders a user has made
-- View invoices, download and cancel the orders
+- View order details and cancel the orders
 - Update their profile
 - Search and filter products
  
@@ -96,8 +96,7 @@ Admins can do the following:
 - Change the orders status
 - Display the Orders done by the users
 - View all orders done by users
-- View all products done by users
-- View redeem requests and accept them
+
 
 ## License
 
