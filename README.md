@@ -1,4 +1,4 @@
-# woodpecker.services E-commerce Website//
+# woodpecker.services E-commerce Website
 
 ## Table of contents
 
@@ -17,7 +17,7 @@ NOTE: Please read the RUN section before opening an issue.
 
 ## Demo
 
-![screenshot](bhfashionsc.png)//
+![screenshot](woodpecker.jpg)
 
 The application is deployed to Digital Ocean and can be accessed through the following link:
 
