@@ -21,7 +21,7 @@ NOTE: Please read the RUN section before opening an issue.
 
 The application is deployed to Digital Ocean and can be accessed through the following link:
 
-[woodpecker.services on DigitalOcean](https://woodpecker.services/)//
+[woodpecker.services on DigitalOcean](https://woodpecker.services/)
 
 The website resembles a real store and you can add products to your cart and wishlist and pay for them. If you want to try the checkout process, you can use the dummy card number/ upi/ Internet Bankinng provided by Razorpay for testing . Please <u><b>DO NOT</b></u> provide real card number and data.
 
@@ -104,4 +104,4 @@ Admins can do the following:
 [![License](https://img.shields.io/:License-MIT-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - MIT License
-- Copyright 2022 © [Rohit KV](https://github.com/Rohitkv11)//
+- Copyright 2022 © [Rohit KV](https://github.com/Rohitkv11)
