@@ -1,4 +1,4 @@
-# bhfashion.live E-commerce Website
+# woodpecker.services E-commerce Website//
 
 ## Table of contents
 
@@ -17,11 +17,11 @@ NOTE: Please read the RUN section before opening an issue.
 
 ## Demo
 
-![screenshot](bhfashionsc.png)
+![screenshot](bhfashionsc.png)//
 
-The application is deployed to AWS and can be accessed through the following link:
+The application is deployed to Digital Ocean and can be accessed through the following link:
 
-[bhfashion.live on AWS](https://bhfashion.live/)
+[woodpecker.services on DigitalOcean](https://woodpecker.services/)//
 
 The website resembles a real store and you can add products to your cart and wishlist and pay for them. If you want to try the checkout process, you can use the dummy card number/ upi/ Internet Bankinng provided by Razorpay for testing . Please <u><b>DO NOT</b></u> provide real card number and data.
 
@@ -64,7 +64,7 @@ The application is built with:
 - SweetAlert
 - NodeMailer
 
-Deployed in AWS EC2 instance with Nginx reverse proxy
+Deployed in DigitalOcean with Nginx reverse proxy
 
 ## Features
 
@@ -104,4 +104,4 @@ Admins can do the following:
 [![License](https://img.shields.io/:License-MIT-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - MIT License
-- Copyright 2022 © [MUHAMMAD SHIHAD BH](https://github.com/Shihadkv)
+- Copyright 2022 © [Rohit KV](https://github.com/Rohitkv11)//
